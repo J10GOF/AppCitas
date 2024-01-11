@@ -4,6 +4,7 @@ module.exports = (sequelize) => {
     sequelize.define('user', {
         sub: {
             type: DataTypes.STRING,
+            unique: true,
             primaryKey: true,
             allowNull: false,
         },
