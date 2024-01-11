@@ -42,9 +42,42 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models estan todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const {} = sequelize.models;
+const { Amistad, Chat, Comment, Like, Mesa, Post, User } = sequelize.models;
 
 // Aca vendrian las relaciones
+// Relacion muchos a muchos entre User y Amistad
+User.belongsToMany(User, {
+  as: "amigos",
+  through: "Amistad",
+  foreignKey: "senderId",
+});
+
+// Relaciones para el modelo Post
+Post.belongsTo(User, { foreignKey: "userSub" });
+Post.hasMany(Comment);
+Post.hasMany(Like);
+
+// Relaciones para el modelo Comment
+Comment.belongsTo(User);
+Comment.belongsTo(Post);
+
+// Relaciones para el modelo de Like
+Like.belongsTo(User);
+Like.belongsTo(Post);
+
+// Relaciones para el Chat
+User.hasMany(Chat, { as: "sentMessages", foreignKey: "senderId" });
+User.hasMany(Chat, { as: "receivedMessages", foreignKey: "receiverId" });
+
+Chat.belongsTo(User, { as: "sender", foreignKey: "senderId" });
+Chat.belongsTo(User, { as: "receiver", foreignKey: "receiverId" });
+
+// Relacion para la Mesa
+Mesa.belongsTo(User, { as: "user1", foreignKey: "user1Id" });
+Mesa.belongsTo(User, { as: "user2", foreignKey: "user2Id" });
+
+Mesa.hasMany(Chat, { foreignKey: "chatId" });
+Chat.belongsTo(Chat, { foreignKey: "chatId" });
 
 module.exports = {
   ...sequelize.models,

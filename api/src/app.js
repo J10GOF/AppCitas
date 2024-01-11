@@ -17,11 +17,12 @@ const io = socketIO(httpServer);
 server.name = "API";
 
 const corsOptions = {
-  origen: "http://localhost:5173",
+  origin: "http://localhost:5173",
   methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
 };
+
 
 server.use(cors(corsOptions));
 
