@@ -32,7 +32,7 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
       },
-      contraseña: {
+      password: {
         type: DataTypes.STRING,
         allowNull: false,
         private: true, // Hace que la columna sea privada
