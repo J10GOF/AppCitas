@@ -34,7 +34,7 @@ router.get("/user/rol/:sub", getUserRol);
 router.post("/user", postUser);
 
 // Ruta POST para iniciar sesión
-router.post("/user/login", loginUser);
+//router.post("/user/login", loginUser);
 
 // Ruta PUT para banear usuarios
 router.put("/user/:id", banedUser);
